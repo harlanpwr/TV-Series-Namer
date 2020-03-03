@@ -3,7 +3,8 @@ from os.path import isfile, join
 import tvdb_api
 
 
-myPath = "./Season 1/"
+myPath = join("./Season 1/")
+print(myPath)
 tv = tvdb_api.Tvdb()
 
 allFiles = [f for f in listdir(myPath) if isfile(join(myPath, f))]
@@ -55,7 +56,7 @@ files = allFiles
 for i in allFiles:
     if fileType not in i:
         files.remove(i)
-files.sort(reverse=True)
+
 for i in files:
     print(i)
 
@@ -73,4 +74,4 @@ for i in range(1, episodeCount + 1):
     # Fstring deciding the layout of name. Until I add a custom way
     newName  = f"{series} - s{add0(season)}e{add0(epNumber)} - {epName}{fileType}"
     newFiles.append(newName)
-    #rename(myPath + files[i-1], myPath + newFiles[i-1])
+    rename(myPath + files[i-1], myPath + newFiles[i-1])
