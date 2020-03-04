@@ -7,6 +7,12 @@ myPath = join("./Season 1/")
 print(myPath)
 tv = tvdb_api.Tvdb()
 
+# Makes a list of charcters that can't be in filenames
+invalidChars = []
+invStr = '[\\/:"*?<>|]+'
+for i in range(len(invStr)):
+    invalidChars.append(invStr[i])
+
 allFiles = [f for f in listdir(myPath) if isfile(join(myPath, f))]
 
 
