@@ -67,11 +67,11 @@ episodeCount = len(epList)
 newFiles = []
 
 # This loop iterates through all the episodes and then renames the file to it
-for i in range(1, episodeCount + 1):
-    epName = epList[i]["episodeName"]
-    epNumber = i
+for i in range(0, episodeCount):
+    epName = epList[i+1]["episodeName"] # returns the episode name of i+1 (so that it isn't 0)
+    epNumber = i+1
 
     # Fstring deciding the layout of name. Until I add a custom way
     newName  = f"{series} - s{add0(season)}e{add0(epNumber)} - {epName}{fileType}"
     newFiles.append(newName)
-    rename(myPath + files[i-1], myPath + newFiles[i-1])
+    rename(myPath + files[i], myPath + newFiles[i])
