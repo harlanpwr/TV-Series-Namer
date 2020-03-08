@@ -1,11 +1,23 @@
 from os import rename, listdir
 from os.path import isfile, join
 import tvdb_api
-
+from platform import system as osType
 
 myPath = join("./Season 1/")
 print(myPath)
 tv = tvdb_api.Tvdb()
+
+# Makes a list of charcters that can't be in filenames
+invalidChars = []
+invStr = '[\\/:"*?<>|]+'
+for i in range(len(invStr)):
+    invalidChars.append(invStr[i])
+
+# Gets operating system and warn user
+osType = osType().lower()
+if osType == 'windows':
+    print("\nYou are on windows. Episodes with invalid Charcters such as:\n"+ invStr + "\nWill be removed\n")
+
 
 allFiles = [f for f in listdir(myPath) if isfile(join(myPath, f))]
 
@@ -73,5 +85,12 @@ for i in range(0, episodeCount):
 
     # Fstring deciding the layout of name. Until I add a custom way
     newName  = f"{series} - s{add0(season)}e{add0(epNumber)} - {epName}{fileType}"
+
+    # Removes invalid charcters if on windows
+    if osType == 'windows':
+        for char in invalidChars:
+            newName = newName.replace(char, '')
+
+
     newFiles.append(newName)
     rename(myPath + files[i], myPath + newFiles[i])
