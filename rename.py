@@ -77,11 +77,20 @@ epList = tv[series][season]
 episodeCount = len(epList)
 
 newFiles = []
-
+print("\n"*5)
 # This loop iterates through all the episodes and then renames the file to it
 for i in range(0, episodeCount):
-    epName = epList[i+1]["episodeName"] # returns the episode name of i+1 (so that it isn't 0)
+    epName = epList[i+1]["episodeName"]  # returns the episode name of i+1 (so that it isn't 0)
+    nameLen = len(epName)
     epNumber = i+1
+
+    # Swaps e.g. "(1)" for " - part 1"
+    if epName[nameLen - 3] == "(" and epName[nameLen - 1] == ")":
+        partNum = epName[nameLen-2]
+        # Removes the (partNum)
+        epName = epName[0 : nameLen-4]
+        # Adds e.g. " - part 1"
+        epName = f"{epName} - part {partNum}"
 
     # Fstring deciding the layout of name. Until I add a custom way
     newName  = f"{series} - s{add0(season)}e{add0(epNumber)} - {epName}{fileType}"
@@ -93,4 +102,8 @@ for i in range(0, episodeCount):
 
 
     newFiles.append(newName)
-    rename(myPath + files[i], myPath + newFiles[i])
+    #print(newFiles[i])
+    try:
+        rename(myPath + files[i], myPath + newFiles[i])
+    except IndexError:
+        print(f"\nIndex Error! You probably have less {fileType} files than there are episodes in {series} season {season}\n")
