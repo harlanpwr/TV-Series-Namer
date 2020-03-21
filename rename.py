@@ -57,8 +57,6 @@ for i in allFiles:
     if fileType not in i:
         files.remove(i)
 
-for i in files:
-    print(i)
 
 # List of episodes and the amount of them
 epList = tv[series][season]
@@ -66,6 +64,7 @@ episodeCount = len(epList)
 
 newFiles = []
 print("\n"*5)
+
 # This loop iterates through all the episodes and then renames the file to it
 for i in range(0, episodeCount):
     epName = epList[i+1]["episodeName"]  # returns the episode name of i+1 (so that it isn't 0)
@@ -81,7 +80,7 @@ for i in range(0, episodeCount):
         epName = f"{epName} - part {partNum}"
 
     # Fstring deciding the layout of name. Until I add a custom way
-    newName  = f"{series} - s{add0(season)}e{add0(epNumber)} - {epName}{fileType}"
+    newName  = f"{series} - S{add0(season)}E{add0(epNumber)} - {epName}{fileType}"
     newFiles.append(newName)
     #print(newFiles[i])
     try:
