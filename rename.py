@@ -85,12 +85,12 @@ for i in range(0, episodeCount):
     epNumber = i+1
 
     # Swaps e.g. "(1)" for " - part 1"
-    if epName[nameLen - 3] == "(" and epName[nameLen - 1] == ")":
+    '''if epName[nameLen - 3] == "(" and epName[nameLen - 1] == ")":
         partNum = epName[nameLen-2]
         # Removes the (partNum)
         epName = epName[0 : nameLen-4]
         # Adds e.g. " - part 1"
-        epName = f"{epName} - part {partNum}"
+        epName = f"{epName} - part {partNum}"'''
 
     # Fstring deciding the layout of name. Until I add a custom way
     newName  = f"{series} - s{add0(season)}e{add0(epNumber)} - {epName}{fileType}"
